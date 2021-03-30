@@ -15,22 +15,32 @@ router.post('/', async (req, res) => {
 
 });
 
-// Obtener todas las Clases
+// Obtener todos los intructores
 router.get('/', async (req, res) => {
 
-    let instructores = await Instructor.find();
+    const id = req.params.id;
+    let instructores = await Instructor.find({ }, { nombre: true, correo:true, imagen: true });
     res.send(instructores);
 
 });
+
+// // Obtener todas las Clases
+// router.get('/', async (req, res) => {
+
+//     let instructores = await Instructor.find();
+//     res.send(instructores);
+
+// });
 
 // Obtener una Clase
 router.get('/:id', async (req, res) => {
 
     const id = req.params.id;
-    let instructores = await Instructor.findOne({ _id: id }, { clases: true });
+    let instructores = await Instructor.findOne({ _id: id }, { clases: true, imagen: true, nombre:true });
     res.send(instructores);
 
 });
+
 
 // Agregar una Clase
 router.put('/:id/clases', async (req, res) => {
